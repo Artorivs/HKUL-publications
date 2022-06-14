@@ -1,0 +1,6 @@
+
+*.json
+dataset/.DS_Store
+.DS_Store
+*.xlsx
+*.csv
