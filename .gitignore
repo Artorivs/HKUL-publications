@@ -1,6 +1,17 @@
-
+# config data
 *.json
-dataset/.DS_Store
-.DS_Store
+
+# original and output data
 *.xlsx
 *.csv
+*.tsv
+
+# all files under the folder /abandoned
+abandoned/*
+
+# .pyc files which generated for caching
+*.pyc
+
+# macOS folder extensions
+dataset/.DS_Store
+.DS_Store
