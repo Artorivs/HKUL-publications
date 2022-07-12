@@ -15,3 +15,6 @@ abandoned/*
 # macOS folder extensions
 dataset/.DS_Store
 .DS_Store
+
+# all ipynb files
+*.ipynb

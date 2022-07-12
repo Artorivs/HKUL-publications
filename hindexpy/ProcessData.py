@@ -94,7 +94,7 @@ def categorise_citation_by_map(dataframe: pd.DataFrame,
     assert option is not None, 'Please specify the option to categorise the citation'
     
     match option:
-        case None:
+        case 'normal':
             cat_list = dataframe[map_col].to_list() # since the values are list and not hashable
             cat_list = {c for sublist in cat_list for c in sublist} # get the unique values
             dict_citation = {cat:[] for cat in cat_list} # make a dictionary to store the citation by category
@@ -105,6 +105,10 @@ def categorise_citation_by_map(dataframe: pd.DataFrame,
                 for cat in cat_list_dataframe:
                     dict_citation[cat].append(dataframe[citation_col].iloc[i])
         
+            # append the citation data without consideration of category
+            dict_citation['ALL'] = dataframe[citation_col].to_list()
+            
+            
         case 'map':
             cat_list = dataframe[map_col].to_list() # since the values are list and not hashable
             cat_list = {map_object[c] for sublist in cat_list for c in sublist if c in map_object} # get the unique values
@@ -116,6 +120,10 @@ def categorise_citation_by_map(dataframe: pd.DataFrame,
                 for cat in cat_list_dataframe:
                     if cat in map_object:
                         dict_citation[map_object[cat]].append(dataframe[citation_col].iloc[i])
+
+            # append the citation data without consideration of category
+            dict_citation['ALL'] = dataframe[citation_col].to_list()
+            
         
         case 'author':
             author_list = dataframe[author_col].unique() # list unique values in column 'handle'
@@ -134,6 +142,10 @@ def categorise_citation_by_map(dataframe: pd.DataFrame,
                 
                 dict_citation[author] = author_cat_data # store the citation by category in the dictionary
 
+            # append the citation data without consideration of category
+            for author in author_list:
+                dict_citation[author]['ALL'] = dataframe[dataframe[author_col] == author][citation_col].to_list()
+        
         case 'both':
             author_list = dataframe[author_col].unique() # list unique values in column 'handle'
             dict_citation = {author:{} for author in author_list} # make a dictionary to store the citation by category
@@ -150,5 +162,10 @@ def categorise_citation_by_map(dataframe: pd.DataFrame,
                             author_cat_data[map_object[cat]].append(author_data.iloc[index][citation_col])
                     
                 dict_citation[author] = author_cat_data # store the citation by category in the dictionary 
+            
+            # append the citation data without consideration of category
+            for author in author_list:
+                dict_citation[author]['ALL'] = dataframe[dataframe[author_col] == author][citation_col].to_list()
+                        
                     
     return dict_citation

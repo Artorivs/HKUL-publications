@@ -49,7 +49,7 @@ def convert_df_to_dict(df, key_col, val_col):
     
     return dict(zip(df[key_col], df[val_col]))
 
-def convert_setofstring_to_list(dataframe: pd.DataFrame, colname: str):
+def convert_setOfString_to_list(dataframe: pd.DataFrame, colname: str):
     '''
     to convert a column value from set-like string to list
         Further Information: 
@@ -73,7 +73,7 @@ def convert_setofstring_to_list(dataframe: pd.DataFrame, colname: str):
     pandas, numpy
     '''
     
-    lambda_str_to_lst = lambda x: str(x).replace('{','').replace('}','').split(',')
+    lambda_str_to_lst = lambda x: str(x).replace('{','').replace('}','').replace('"','').replace("'",'').split(',')
     dataframe[colname] = dataframe[colname].apply(lambda_str_to_lst)
     
     return dataframe

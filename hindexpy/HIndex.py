@@ -1,5 +1,5 @@
 import numpy as np
-from pandas import Series
+from pandas import Series, DataFrame
 
 class SubjectCitation:
     def __init__(self):
