@@ -74,21 +74,21 @@ def convert_setOfString_to_list(dataframe: pd.DataFrame, colname: str):
     '''
     
     lambda_str_to_lst = lambda x: str(x).replace('{','').replace('}','').replace('"','').replace("'",'').split(',')
-    dataframe[colname] = dataframe[colname].apply(lambda_str_to_lst)
+    dataframe.loc[:, colname] = dataframe[colname].apply(lambda_str_to_lst)
     
     return dataframe
 
 
 def convert_pipeSeperatedString_to_list(dataframe: pd.DataFrame, col_name: str) -> pd.DataFrame:
-    dataframe[col_name] = dataframe[col_name].apply(lambda x: x.replace(' ', '').split('|'))
+    dataframe.loc[:,col_name] = dataframe[col_name].apply(lambda x: x.replace(' ', '').split('|'))
     
     return dataframe
 
 def convert_column_datetime(dataframe: pd.DataFrame, date_colname:str, date_format=None):
     
     if date_format is None:
-        dataframe[date_colname] = pd.to_datetime(dataframe[date_colname])
+        dataframe.loc[:, date_colname] = pd.to_datetime(dataframe[date_colname])
     else:
-        dataframe[date_colname] = pd.to_datetime(dataframe[date_colname], format=date_format)
+        dataframe.loc[:, date_colname] = pd.to_datetime(dataframe[date_colname], format=date_format)
     
     return dataframe

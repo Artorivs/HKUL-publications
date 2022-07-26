@@ -5,9 +5,8 @@
 *.xlsx
 *.csv
 *.tsv
-
-# all files under the folder /abandoned
-abandoned/*
+*.db
+*.sqlite
 
 # .pyc files which generated for caching
 *.pyc
@@ -18,3 +17,6 @@ dataset/.DS_Store
 
 # all ipynb files
 *.ipynb
+
+# ignore all files under the folder /code
+code/*
